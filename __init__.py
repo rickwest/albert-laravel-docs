@@ -84,8 +84,10 @@ def handleQuery(query):
 
         if len(items) == 0:
 
+            term = "laravel {}".format(query.string)
+
             google = "https://www.google.com/search?q={}".format(
-                urllib.parse.quote("laravel {}".format(query.string))
+                urllib.parse.quote(term)
             )
 
             items.append(
@@ -94,7 +96,7 @@ def handleQuery(query):
                     icon=google_icon,
                     text="Search Google",
                     subtext='No match found. Search Google for: "{}"'.format(
-                        query.string
+                        term
                     ),
                     actions=[UrlAction("No match found. Search Google", google)],
                 )
