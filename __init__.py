@@ -22,6 +22,7 @@ index = client.init_index("docs")
 
 
 icon = "{}/icon.png".format(path.dirname(__file__))
+google_icon = "{}/google.png".format(path.dirname(__file__))
 
 
 def getSubtitle(hit):
@@ -90,7 +91,7 @@ def handleQuery(query):
             items.append(
                 Item(
                     id=__prettyname__,
-                    icon=icon,
+                    icon=google_icon,
                     text="Search Google",
                     subtext='No match found. Search Google for: "{}"'.format(
                         query.string
