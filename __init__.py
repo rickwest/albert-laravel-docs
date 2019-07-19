@@ -49,20 +49,15 @@ def handleQuery(query):
             return
 
         if query.string.strip():
-            search = index.search(query.string, {"tagFilters": "master"})
-
-            urls = []
+            search = index.search(
+                query.string, {"tagFilters": "master", "hitsPerPage": 5}
+            )
 
             for hit in search["hits"]:
-                url = "{}{}".format(docs, hit["link"])
-
-                if url in urls:
-                    continue
-
-                urls.append(url)
 
                 title = hit["h1"]
                 subtitle = getSubtitle(hit)
+                url = "{}{}".format(docs, hit["link"])
 
                 text = False
                 try:
@@ -79,7 +74,7 @@ def handleQuery(query):
                         id=__prettyname__,
                         icon=icon,
                         text=html.unescape(title),
-                        subtext=html.unescape(subtitle),
+                        subtext=html.unescape(subtitle if subtitle is not None else ""),
                         actions=[UrlAction("Open in the Laravel Documentation", url)],
                     )
                 )
