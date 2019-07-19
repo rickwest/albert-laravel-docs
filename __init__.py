@@ -84,29 +84,40 @@ def handleQuery(query):
                     )
                 )
 
-        if len(items) == 0:
+            if len(items) == 0:
+                term = "laravel {}".format(query.string)
 
-            term = "laravel {}".format(query.string)
-
-            google = "https://www.google.com/search?q={}".format(
-                urllib.parse.quote(term)
-            )
-
-            items.append(
-                Item(
-                    id=__prettyname__,
-                    icon=google_icon,
-                    text="Search Google",
-                    subtext='No match found. Search Google for: "{}"'.format(term),
-                    actions=[UrlAction("No match found. Search Google", google)],
+                google = "https://www.google.com/search?q={}".format(
+                    urllib.parse.quote(term)
                 )
-            )
+
+                items.append(
+                    Item(
+                        id=__prettyname__,
+                        icon=google_icon,
+                        text="Search Google",
+                        subtext='No match found. Search Google for: "{}"'.format(term),
+                        actions=[UrlAction("No match found. Search Google", google)],
+                    )
+                )
+
+                items.append(
+                    Item(
+                        id=__prettyname__,
+                        icon=icon,
+                        text="Open Docs",
+                        subtext="No match found. Open laravel.com/docs...",
+                        actions=[UrlAction("Open the Laravel Documentation", docs)],
+                    )
+                )
+
+        else:
             items.append(
                 Item(
                     id=__prettyname__,
                     icon=icon,
                     text="Open Docs",
-                    subtext="No match found. Open laravel.com/docs...",
+                    subtext="Open laravel.com/docs...",
                     actions=[UrlAction("Open the Laravel Documentation", docs)],
                 )
             )
