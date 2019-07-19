@@ -15,7 +15,9 @@ You will need the `algoliasearch` [Python API Client](https://www.algolia.com/do
 
 Simply clone this project into your extension directory by running the following command:
 
-`git clone https://github.com/rickwest/albert-laravel-docs.git ~/.local/share/albert/org.albert.extension.python/modules/albert-laravel-docs`
+```
+git clone https://github.com/rickwest/albert-laravel-docs.git ~/.local/share/albert/org.albert.extension.python/modules/albert-laravel-docs
+```
 
 ## Usage
 
