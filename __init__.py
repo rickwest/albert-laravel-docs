@@ -24,6 +24,8 @@ index = client.init_index("docs")
 icon = "{}/icon.png".format(path.dirname(__file__))
 google_icon = "{}/google.png".format(path.dirname(__file__))
 
+docs = "https://laravel.com/docs/"
+
 
 def getSubtitle(hit):
     if hit["h4"] is not None:
@@ -41,46 +43,46 @@ def getSubtitle(hit):
 def handleQuery(query):
     items = []
 
-    if query.isTriggered and query.string.strip():
+    if query.isTriggered:
 
         if not query.isValid:
             return
 
-        search = index.search(query.string, {"tagFilters": "master"})
+        if query.string.strip():
+            search = index.search(query.string, {"tagFilters": "master"})
 
-        urls = []
-        docs = "https://laravel.com/docs/"
+            urls = []
 
-        for hit in search["hits"]:
-            url = "{}{}".format(docs, hit["link"])
+            for hit in search["hits"]:
+                url = "{}{}".format(docs, hit["link"])
 
-            if url in urls:
-                continue
+                if url in urls:
+                    continue
 
-            urls.append(url)
+                urls.append(url)
 
-            title = hit["h1"]
-            subtitle = getSubtitle(hit)
+                title = hit["h1"]
+                subtitle = getSubtitle(hit)
 
-            text = False
-            try:
-                text = hit["_highlightResult"]["content"]["value"]
-            except KeyError:
-                pass
+                text = False
+                try:
+                    text = hit["_highlightResult"]["content"]["value"]
+                except KeyError:
+                    pass
 
-            if text and subtitle:
-                title = "{} - {}".format(title, subtitle)
-                subtitle = text
+                if text and subtitle:
+                    title = "{} - {}".format(title, subtitle)
+                    subtitle = text
 
-            items.append(
-                Item(
-                    id=__prettyname__,
-                    icon=icon,
-                    text=html.unescape(title),
-                    subtext=html.unescape(subtitle),
-                    actions=[UrlAction("Open in the Laravel Documentation", url)],
+                items.append(
+                    Item(
+                        id=__prettyname__,
+                        icon=icon,
+                        text=html.unescape(title),
+                        subtext=html.unescape(subtitle),
+                        actions=[UrlAction("Open in the Laravel Documentation", url)],
+                    )
                 )
-            )
 
         if len(items) == 0:
 
@@ -95,9 +97,7 @@ def handleQuery(query):
                     id=__prettyname__,
                     icon=google_icon,
                     text="Search Google",
-                    subtext='No match found. Search Google for: "{}"'.format(
-                        term
-                    ),
+                    subtext='No match found. Search Google for: "{}"'.format(term),
                     actions=[UrlAction("No match found. Search Google", google)],
                 )
             )
