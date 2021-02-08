@@ -7,12 +7,13 @@ import urllib.parse
 import html
 from algoliasearch.search_client import SearchClient
 
-from albertv0 import *
+from albert import *
 
 __iid__ = "PythonInterface/v0.2"
+__title__ = "Laravel Docs"
 __prettyname__ = "Laravel Docs"
-__version__ = "0.1"
-__trigger__ = "ld "
+__version__ = "0.1.1"
+__triggers__ = "ld "
 __author__ = "Rick West"
 __dependencies__ = ["algoliasearch"]
 
