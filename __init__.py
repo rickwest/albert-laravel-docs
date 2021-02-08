@@ -9,13 +9,13 @@ from algoliasearch.search_client import SearchClient
 
 from albert import *
 
-__iid__ = "PythonInterface/v0.2"
 __title__ = "Laravel Docs"
 __prettyname__ = "Laravel Docs"
-__version__ = "0.1.1"
+__doc__ = "Albert extension for quickly and easily searching the Laravel documentation"
+__version__ = "0.4.1"
 __triggers__ = "ld "
-__author__ = "Rick West"
-__dependencies__ = ["algoliasearch"]
+__authors__ = "Rick West"
+__py_dep__ = ["algoliasearch"]
 
 
 client = SearchClient.create("8BB87I11DE", "8e1d446d61fce359f69cd7c8b86a50de")
